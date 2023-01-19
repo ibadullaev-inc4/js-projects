@@ -16,11 +16,25 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    modalCloseBtn.addEventListener('click', () => {
+    function closeModal() {
         modal.classList.add('hide');
         modal.classList.remove('show');
-        // modal.classList.toggle('show');
         document.body.style.overflow = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            console.log(e.target);
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
     });
 
 
