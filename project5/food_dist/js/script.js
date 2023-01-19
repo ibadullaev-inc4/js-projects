@@ -42,4 +42,59 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    //Timer
+
+    const deadline = '2022-01-28';
+
+    function getZero(num) {
+        if (num >=0 && num < 10) {
+            return `0${num}`;
+        } else {
+            return num;
+        }
+    }
+
+    function getTimeRemaining(endtime) {
+        const t = Date.parse(endtime) - Date.parse(new Date()),
+              days = Math.floor(t/(1000*60*60*24)),
+              hours = Math.floor((t/(1000*60*60)%24)),
+              minutes = Math.floor((t/1000/60)%60),
+              seconds = Math.floor((t/1000)%60);
+       
+        const rem = {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+        return rem;
+    }
+
+    function setClock(selector, endtime) {
+        const timer = document.querySelector(selector),
+              days = document.querySelector('#days'),
+              hours = document.querySelector('#hours'),
+              minutes = document.querySelector('#minutes'),
+              seconds = document.querySelector('#seconds');
+              timeInterval = setInterval(updateClock,1000);
+
+        updateClock();
+
+        function updateClock() {
+            const t = getTimeRemaining(endtime);
+            days.innerHTML = getZero(t.days);
+            hours.innerHTML = getZero(t.hours);
+            minutes.innerHTML = t.minutes;
+            seconds.innerHTML = t.seconds;
+
+            if (t.total <= 0) {
+                clearInterval(timeInterval);
+                document.querySelector('.promotion__timer').remove();
+            };
+
+        }
+
+    }
+    setClock('.timer',deadline);
 });
