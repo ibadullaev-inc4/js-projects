@@ -2,6 +2,28 @@ console.log("ok");
 
 window.addEventListener('DOMContentLoaded', () => {
 
+
+    const modalTrigger = document.querySelectorAll('[data-modal]');
+    const modal = document.querySelector('.modal');
+    const modalCloseBtn = document.querySelector('[data-close]');
+
+    modalTrigger.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('show');
+            modal.classList.remove('hide');
+            // modal.classList.toggle('show');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    modalCloseBtn.addEventListener('click', () => {
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        // modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    });
+
+
     const tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent = document.querySelectorAll('.tabcontent')
           tabsParent = document.querySelector('.tabheader__items');
@@ -44,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Timer
 
-    const deadline = '2022-01-28';
+    const deadline = '2023-01-28';
 
     function getZero(num) {
         if (num >=0 && num < 10) {
@@ -97,4 +119,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }
     setClock('.timer',deadline);
+
+    //Modal
+
 });
